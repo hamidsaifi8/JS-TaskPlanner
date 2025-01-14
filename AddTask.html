@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: linear-gradient(to right, gray, rgb(218, 217, 217));
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            background-image: linear-gradient(to right, #5d4747, #814a13);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 7px 0px #617588, 0px 0px 7px 0px #0a2b4b;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f0e9e9;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #088e03;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #074387;
+            color: white;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+
+        .delete {
+            background-color: #dc3545;
+            border: none;
+            padding: 5px 10px;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            width: fit-content;
+        }
+
+        .delete:hover {
+            background-color: #c82333;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Add Items/To-Do</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task...">
+        <button onclick="addTask()">Click to Add</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskList = document.getElementById('taskList');
+
+            // Get the input value
+            const taskText = taskInput.value.trim();
+
+            if (taskText === '') {
+                alert('Please enter a task.');
+                return;
+            }
+
+            // Create a new list item
+            const li = document.createElement('li');
+            li.textContent = taskText;
+
+            // Add click event to toggle completion
+            li.addEventListener('click', function () {
+                li.classList.toggle('completed');
+            });
+
+            // Add delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.className = 'delete';
+            deleteButton.addEventListener('click', function () {
+                taskList.removeChild(li);
+            });
+
+            li.appendChild(deleteButton);
+            taskList.appendChild(li);
+
+            // Clear the input
+            taskInput.value = '';
+        }
+    </script>
+
+
+
+</body>
+
+</html>
